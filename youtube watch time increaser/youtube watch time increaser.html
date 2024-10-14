@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Watch Time Increaser</title>
+    <style>
+        body {
+            background-color: #3e7fd4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 100px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space below logo */
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 48%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .green-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .yellow-btn {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .blue-btn {
+            background-color: #007bff;
+            color: #fff;
+            margin: 5px 0;
+        }
+        .video-display {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        iframe {
+            width: 320px;
+            height: 180px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/VmdUiaD0_HMcf_1024.jpg') }}" alt="YOUTUBE WATCH HOURS INCREASER" class="logo">
+
+        <h1>Best App To Use For Youtube Watch Time</h1>
+        <input type="text" placeholder="Enter YouTube video link..." id="link-input">
+        
+        <div class="button-row">
+            <button class="green-btn">Rate App</button>
+            <button class="yellow-btn">More App</button>
+        </div>
+        
+        <button class="yellow-btn">Preview</button>
+        
+        <button class="blue-btn" onclick="generateViews(15)">15 VIEWS</button>
+        <button class="blue-btn" onclick="generateViews(21)">21 VIEWS</button>
+        <button class="blue-btn" onclick="generateViews(24)">24 VIEWS</button>
+        <button class="blue-btn" onclick="generateViews(30)">30 VIEWS</button>
+        <button class="blue-btn" onclick="generateViews('unlimited')">UNLIMITED AUTO VIEWS</button>
+
+        <div class="video-display" id="video-display"></div>
+    </div>
+
+    <script>
+        function extractVideoId(url) {
+            const urlParams = new URLSearchParams(new URL(url).search);
+            return urlParams.get('v');
+        }
+
+        function generateViews(count) {
+            const videoLink = document.getElementById('link-input').value;
+            const videoId = extractVideoId(videoLink);
+
+            if (!videoId) {
+                alert("Invalid YouTube link!");
+                return;
+            }
+
+            const videoContainer = document.getElementById('video-display');
+            videoContainer.innerHTML = ""; // Clear previous videos
+
+            let numberOfViews = count === 'unlimited' ? 50 : count; // Simulate "unlimited" as 50 for demo purposes
+
+            for (let i = 0; i < numberOfViews; i++) {
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`; // Autoplay and mute
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true;
+                videoContainer.appendChild(iframe);
+            }
+        }
+        
+        document.querySelector('.yellow-btn').addEventListener('click', generateViews);
+    </script>
+
+</body>
+</html>
